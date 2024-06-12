@@ -1,0 +1,57 @@
+```py
+class Client:
+  
+  def __init__(self, id, name):
+    self.id = id
+    self.name = name
+    self.transactions = []
+    
+
+  def add_transaction(self, transaction):
+    self.transactions.append(transaction)
+
+  def purchase_items(self, items):
+        transaction = Transaction(items)
+        self.add_transaction(transaction)
+
+class Item:
+  def __init__(self, item, price):
+    self.item = item
+    self.price = price
+
+
+class Transaction:
+  def __init__(self, items):
+    self.items = items
+    self.amount = sum(item.price for item in items)
+
+
+clients = []
+clients.append(Client("001", "Ainars"))
+clients.append(Client("002", "Maija"))
+clients.append(Client("003", "John"))
+clients.append(Client("004", "Laura"))
+
+items = []
+items.append(Item("bread", 2))
+items.append(Item("milk", 1.5))
+items.append(Item("juice", 3))
+items.append(Item("cake", 8))
+items.append(Item("fish", 12))
+
+clients[0].purchase_items([items[2]])
+clients[1].purchase_items([items[2], items[3]])
+clients[2].purchase_items([items[3]])
+clients[3].purchase_items([items[0],items[1], items[2], items[3]])
+#clients[3].purchase_items([item for item in items])
+clients[0].purchase_items([items[4]])
+
+for cl in clients:
+  print(f"client's name: {cl.name}, items items purchased by {cl.name}: ")
+  for transaction in cl.transactions:
+    print(f"Transaction total amount {transaction.amount} EUR")
+    for item in transaction.items:
+      print(f"Item: {item.item}, price: {item.price} EUR")
+
+
+```
